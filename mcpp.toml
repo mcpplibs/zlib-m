@@ -1,0 +1,43 @@
+# Module wrapper; upstream API preserved. Policy: mcpp-index/docs/mwrap.md.
+[package]
+namespace   = "mcpplibs.mwrap"
+name        = "zlib"
+version     = "1.3.2"
+description = "zlib 1.3.2 C++ modules for mcpp (import mcpplibs.mwrap.zlib;): deflate and inflate streams, the one-call utility functions, gzip files and checksums over compat.zlib, with the constants of zlib.h as C++ constants"
+license     = "Apache-2.0"
+authors     = ["mcpp-community"]
+repo        = "https://github.com/mcpplibs/zlib-m"
+platforms   = ["linux", "macos", "windows"]
+
+[targets.zlib]
+kind = "lib"
+
+[build]
+sources      = ["src/*.cppm"]
+# <mwrap/zlib/macros.hpp>: deflateInit, inflateInit and the other macros that take arguments.
+include_dirs = ["include"]
+
+[dependencies]
+compat.zlib = "1.3.2"
+
+[test]
+discover = ["tests/*.cpp"]
+
+[package.metadata.mwrap]
+upstream-version = "1.3.2"
+
+[[runtime.deploy]]
+from = "LICENSE"
+to   = "licenses/zlib"
+
+[[runtime.deploy]]
+from = "NOTICE"
+to   = "licenses/zlib"
+
+[[runtime.deploy]]
+from = "upstream/zlib/README"
+to   = "licenses/zlib/upstream/zlib"
+
+[[runtime.deploy]]
+from = "upstream/zlib/LICENSE"
+to   = "licenses/zlib/upstream/zlib"
