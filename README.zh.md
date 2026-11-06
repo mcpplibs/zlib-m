@@ -68,10 +68,10 @@ int main() {
 ## 构建与测试
 
 Linux、macOS、Windows 的 CI 用 GCC 与 LLVM 构建模块并运行测试：一次调用的往返、分段输入的 raw deflate 流及其还原、
-`123456789` 的 CRC-32 与 Adler-32 公布值、经 `gzgetc` 读回的 gzip 文件、每个常量与类型同其宏相等、头文件混用。CI 还运行：
+`123456789` 的 CRC-32 与 Adler-32 公布值、经 `gzgetc` 读回的 gzip 文件、每个常量与类型同其宏相等、每个导出函数都能链接、头文件混用。CI 还运行：
 
 - 导出审计（[tools/generate.py](tools/generate.py) `--check`）：按 clang 读到的头文件重新生成模块、宏映射、宏头文件与
-  常量测试并逐字节比较；在 macOS 与 Windows 上检查头文件在该平台声明的每个名字都已导出；
+  生成的测试并逐字节比较；在 macOS 与 Windows 上检查头文件在该平台声明的每个名字都已导出；
 - 在同一份库上运行上游的 `test/example.c`（[tools/run_conformance.py](tools/run_conformance.py)）。
 
 另一个作业把默认模板当作已安装的包生成项目并运行。

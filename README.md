@@ -81,11 +81,11 @@ beside the module reads the constants through the header's macros
 Linux, macOS and Windows CI build the modules with GCC and LLVM and run the
 tests: a one-call round trip, a raw deflate stream fed in pieces and inflated,
 the published CRC-32 and Adler-32 of `123456789`, a gzip file written and read
-back through `gzgetc`, every constant and type against its macro, and header
-mixing. CI also runs:
+back through `gzgetc`, every constant and type against its macro, every exported
+function linked, and header mixing. CI also runs:
 
 - the export audit ([tools/generate.py](tools/generate.py) `--check`): the
-  module, the macro mapping, the macro header and the constant test are
+  module, the macro mapping, the macro header and the generated tests are
   regenerated from the headers as clang reads them and compared, and on macOS
   and Windows every name the headers declare there is exported;
 - upstream's `test/example.c` over the same library

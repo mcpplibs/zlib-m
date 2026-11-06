@@ -2,7 +2,8 @@
 // nor a type: they take arguments, or call a function. A named module cannot export a
 // macro: include this header before `import mcpplibs.mwrap.zlib;`. Each definition is
 // upstream's (zlib 1.3.2, zlib license), made only where the upstream header has
-// not defined it, with the constants it names read from mcpplibs::mwrap::zlib::macros.
+// not defined it, with the constants it names read from mcpplibs::mwrap::zlib::macros
+// and NULL written nullptr.
 // The upstream header included after this one redefines these macros.
 // Written by tools/generate.py.
 #ifndef MWRAP_ZLIB_MACROS_HPP

@@ -76,7 +76,7 @@ jobs:
       - name: Build the modules
         run: mcpp build $TARGET
 
-      - name: Tests (round trip, streams, checksums, gzip files, the constants and types, header mixing)
+      - name: Tests (round trip, streams, checksums, gzip files, the constants and types, every function linked, header mixing)
         run: mcpp test $TARGET
 
       - name: Export audit (the headers as clang reads them on this host)
