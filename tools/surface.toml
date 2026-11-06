@@ -1,0 +1,32 @@
+# What tools/generate.py cannot read from the headers; everything else it can.
+name          = "zlib"
+title         = "zlib 1.3.2"
+compat        = "zlib"
+version       = "1.3.2"
+license       = "zlib license"
+generated-on  = "linux"
+headers       = ["zlib.h"]
+owned         = ["zlib.h", "zconf.h"]
+
+# How zconf.h writes the declarations, not what zlib offers: calling-convention
+# and linkage markers (ZEXTERN, ZEXPORT, ZEXPORTVA, FAR), the K&R prototype
+# wrapper OF, the const marker z_const, and the configuration that zconf.h
+# derives for its own use on each target (STDC, Z_HAVE_UNISTD_H, Z_LFS64,
+# Z_LARGE64, Z_WANT64, Z_HAVE_STDARG_H). The module's exports already carry
+# their effect; a definition copied from one target would be wrong on another.
+syntax = [
+  "FAR", "OF", "STDC", "ZEXPORT", "ZEXPORTVA", "ZEXTERN", "z_const",
+  "Z_HAVE_UNISTD_H", "Z_HAVE_STDARG_H", "Z_LARGE64", "Z_LFS64", "Z_WANT64",
+]
+
+# Declared only where zconf.h provides 64-bit offsets (glibc and musl with
+# _LARGEFILE64_SOURCE, or _FILE_OFFSET_BITS=64), and, for gzopen_w, on Windows.
+[conditional]
+gzopen64            = "defined(Z_LARGE64) || defined(Z_WANT64)"
+gzseek64            = "defined(Z_LARGE64) || defined(Z_WANT64)"
+gztell64            = "defined(Z_LARGE64) || defined(Z_WANT64)"
+gzoffset64          = "defined(Z_LARGE64) || defined(Z_WANT64)"
+adler32_combine64   = "defined(Z_LARGE64) || defined(Z_WANT64)"
+crc32_combine64     = "defined(Z_LARGE64) || defined(Z_WANT64)"
+crc32_combine_gen64 = "defined(Z_LARGE64) || defined(Z_WANT64)"
+gzopen_w            = "defined(_WIN32)"

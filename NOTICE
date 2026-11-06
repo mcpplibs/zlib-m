@@ -1,0 +1,13 @@
+zlib-m: C++ module wrapper
+Copyright (c) 2026 mcpp-community contributors
+
+The wrapper contributions are licensed under the Apache License, Version 2.0.
+Upstream code, copied interfaces and dependencies retain their original
+licenses and copyright notices. zlib is distributed under the zlib license:
+
+  (C) 1995-2026 Jean-loup Gailly and Mark Adler
+
+Its original README and license are retained in upstream/zlib/. The library
+itself is provided by compat.zlib from the same release, and the macros of
+include/mwrap/zlib/macros.hpp are upstream's definitions. Provenance and
+checksums are recorded in upstream/documents.json.

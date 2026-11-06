@@ -1,0 +1,40 @@
+// {{project.name}}: zlib through import mcpplibs.mwrap.zlib. The functions and
+// types are zlib's own names; the constants are in mcpplibs::mwrap::zlib::macros,
+// and deflateInit/inflateInit, which are macros, come from <mwrap/zlib/macros.hpp>.
+#include <mwrap/zlib/macros.hpp>
+import std;
+import mcpplibs.mwrap.zlib;
+
+namespace z = mcpplibs::mwrap::zlib::macros;
+
+int main(int argc, char** argv)
+{
+    std::string text;
+    if (argc > 1) {
+        std::ifstream file(argv[1], std::ios::binary);
+        text.assign(std::istreambuf_iterator<char>(file), {});
+    } else {
+        for (int i = 0; i < 100; ++i) text += "zlib through a C++ module, line by line\n";
+    }
+    const auto* bytes = reinterpret_cast<const Bytef*>(text.data());
+
+    // One call.
+    std::vector<Bytef> packed(compressBound(text.size()));
+    uLongf packed_size = packed.size();
+    if (compress2(packed.data(), &packed_size, bytes, text.size(), z::Z_BEST_COMPRESSION) != z::Z_OK) return 1;
+
+    // The same bytes restored through a stream.
+    z_stream in{};
+    if (inflateInit(&in) != z::Z_OK) return 1;
+    std::string back(text.size(), '\0');
+    in.next_in = packed.data();
+    in.avail_in = static_cast<uInt>(packed_size);
+    in.next_out = reinterpret_cast<Bytef*>(back.data());
+    in.avail_out = static_cast<uInt>(back.size());
+    const int rc = inflate(&in, z::Z_FINISH);
+    inflateEnd(&in);
+
+    std::println("zlib {}: {} bytes -> {} bytes, restored {}, CRC-32 {:08x}", zlibVersion(), text.size(), packed_size,
+                 rc == z::Z_STREAM_END && back == text ? "intact" : "DIFFERENT", crc32(0, bytes, text.size()));
+    return rc == z::Z_STREAM_END && back == text ? 0 : 1;
+}

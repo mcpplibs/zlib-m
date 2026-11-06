@@ -1,0 +1,4 @@
+[template]
+description  = "Compression with import mcpplibs.mwrap.zlib: a text compressed in one call and as a stream, restored, and its CRC-32"
+default      = true
+post_message = "Run `mcpp run`, or `mcpp run -- <file>` to compress a file of your own."
