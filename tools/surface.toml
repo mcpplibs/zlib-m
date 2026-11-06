@@ -12,11 +12,15 @@ owned         = ["zlib.h", "zconf.h"]
 # and linkage markers (ZEXTERN, ZEXPORT, ZEXPORTVA, FAR), the K&R prototype
 # wrapper OF, the const marker z_const, and the configuration that zconf.h
 # derives for its own use on each target (STDC, Z_HAVE_UNISTD_H, Z_LFS64,
-# Z_LARGE64, Z_WANT64, Z_HAVE_STDARG_H). The module's exports already carry
-# their effect; a definition copied from one target would be wrong on another.
+# Z_LARGE64, Z_WANT64, Z_HAVE_STDARG_H, and WIN32 from _WIN32). The module's
+# exports already carry their effect; a definition copied from one target would
+# be wrong on another. Where <unistd.h> is not included (macOS, Windows) zconf.h
+# also supplies <stdio.h>'s SEEK_SET, SEEK_CUR and SEEK_END, which belong to
+# the C library.
 syntax = [
   "FAR", "OF", "STDC", "ZEXPORT", "ZEXPORTVA", "ZEXTERN", "z_const",
-  "Z_HAVE_UNISTD_H", "Z_HAVE_STDARG_H", "Z_LARGE64", "Z_LFS64", "Z_WANT64",
+  "Z_HAVE_UNISTD_H", "Z_HAVE_STDARG_H", "Z_LARGE64", "Z_LFS64", "Z_WANT64", "WIN32",
+  "SEEK_SET", "SEEK_CUR", "SEEK_END",
 ]
 
 # Declared only where zconf.h provides 64-bit offsets (glibc and musl with

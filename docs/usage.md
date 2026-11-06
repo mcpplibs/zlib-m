@@ -35,8 +35,10 @@ offsets. `gzopen_w` is exported on Windows.
   macro.
 - **Declaration syntax.** `ZEXTERN`, `ZEXPORT`, `ZEXPORTVA`, `FAR`, `OF`,
   `z_const` and the configuration that `<zconf.h>` derives for itself (`STDC`,
-  `Z_HAVE_UNISTD_H`, `Z_HAVE_STDARG_H`, `Z_LFS64`, `Z_LARGE64`, `Z_WANT64`) are
-  not offered: they spell the declarations, and their values differ by target.
+  `Z_HAVE_UNISTD_H`, `Z_HAVE_STDARG_H`, `Z_LFS64`, `Z_LARGE64`, `Z_WANT64`,
+  `WIN32`) are not offered: they spell the declarations, and their values differ
+  by target. Neither are `SEEK_SET`, `SEEK_CUR` and `SEEK_END`, which `<zconf.h>`
+  supplies on macOS and Windows for `gzseek`: they are `<stdio.h>`'s.
   tools/surface.toml lists them.
 
 ## A header beside the module
