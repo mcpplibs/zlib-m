@@ -2,7 +2,7 @@
 [package]
 namespace   = "mcpplibs.mwrap"
 name        = "zlib"
-version     = "1.3.2"
+version     = "1.3.2.1"
 description = "zlib 1.3.2 C++ modules for mcpp (import mcpplibs.mwrap.zlib;): deflate and inflate streams, the one-call utility functions, gzip files and checksums over compat.zlib, with the constants of zlib.h as C++ constants"
 license     = "Apache-2.0"
 authors     = ["mcpp-community"]
