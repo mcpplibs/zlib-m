@@ -28,7 +28,7 @@ library.
 ## Getting started
 
 ```sh
-mcpp new compress --template mcpplibs.mwrap.zlib@1.3.2
+mcpp new compress --template mcpplibs.mwrap.zlib@1.3.2.1
 cd compress
 mcpp run
 ```
@@ -38,7 +38,7 @@ inflate stream, and prints both sizes and the CRC-32.
 
 ```toml
 [dependencies]
-"mcpplibs.mwrap.zlib" = "1.3.2"
+mcpplibs.mwrap.zlib = "1.3.2.1"
 ```
 
 ```cpp

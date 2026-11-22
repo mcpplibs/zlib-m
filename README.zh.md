@@ -24,7 +24,7 @@
 ## 快速开始
 
 ```sh
-mcpp new compress --template mcpplibs.mwrap.zlib@1.3.2
+mcpp new compress --template mcpplibs.mwrap.zlib@1.3.2.1
 cd compress
 mcpp run
 ```
@@ -33,7 +33,7 @@ mcpp run
 
 ```toml
 [dependencies]
-"mcpplibs.mwrap.zlib" = "1.3.2"
+mcpplibs.mwrap.zlib = "1.3.2.1"
 ```
 
 ```cpp
